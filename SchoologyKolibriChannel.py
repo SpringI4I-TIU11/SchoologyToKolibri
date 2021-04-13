@@ -1,6 +1,15 @@
-#Studio Token = ccd05e01d1342eb934a29b714a34cf0f96ad5aca
+"""
+Import tool that takes resources from a Schoology section and 
+    uses them to a Kolibri Channel. 
 
-#Creating Channel
+Using the tool requires access to a Schoology site and the API tokens.
+The API tokens can be found at https://app.schoology.com/api.
+The two tokens needed are:
+    - Current Consumer Key
+    - Current Consumer Secret
+
+
+"""
 import sys
 import requests
 import json
@@ -536,7 +545,11 @@ class SimpleChef(SushiChef):
 if __name__ == "__main__":
     """
     Run this script on the command line using:
-        python sushichef.py  --token=ccd05e01d1342eb934a29b714a34cf0f96ad5aca
+        python SchoologyKolibriChannel.py  --token=<your-token>
+        
+        or you can store the token in an empty .txt file and use that to run the command.
+        
+        python SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
     """
     simple_chef = SimpleChef()
     simple_chef.main()
