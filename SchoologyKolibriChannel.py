@@ -1,14 +1,27 @@
 """
 Import tool that takes resources from a Schoology section and 
-    uses them to a Kolibri Channel. 
+    uses them to a Kolibri Channel. Schoology and Kolibri accounts 
+    will be needed to run this tool.
 
 Using the tool requires access to a Schoology site and the API tokens.
 The API tokens can be found at https://app.schoology.com/api.
 The two tokens needed are:
     - Current Consumer Key
     - Current Consumer Secret
+These will be entered when running the tool. 
+    
+The Kolibri/Ricecooker API token will also be needed:
+This can be found at https://studio.learningequality.org/ in the settings. 
+This token is used in the command line to run the script, and itcan be done in two different ways.
 
+Run this script on the command line using:
+    python SchoologyKolibriChannel.py  --token=<your-token>
 
+    or you can store the token in an empty .txt file and use that to run the command.
+
+    python SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
+    
+The Ricecooker token will ensure that the created channel will be saved to your account.
 """
 import sys
 import requests
@@ -241,6 +254,27 @@ def downloadPowerpoint(id):
     fileName = re.findall("filename=.*;", req.headers['content-disposition'])[0].split("\"")[1]
     with open(fileName, 'wb') as f:
         f.write(req.content)
+        
+    #Issue where pdfs are being downloaded as HTML documents
+        #This ensures it is a pdf file type
+    if(fileName.find('.html') != -1):
+        #Get filename without extension and replace with'.pdf'
+        pdfName = os.path.splitext(fileName)[0] + '.pdf'
+        print(pdfName)
+
+        #pdfName = pdfkit.from_file(fileName, False)
+        
+        print("\nHTML found instead of PDF.\nConverting to PDF using pdfkit...")
+        
+        #INFO: Could not find files for the given pattern(s).
+            #wkhtmltopdf install needed
+            #I would prefer to find a different way, or figure out why it is downloading as html, but this will do for now
+        pdfkit.from_file(fileName, pdfName)
+        
+        print("PDF Conversion Complete")
+        
+        fileName = pdfName
+        
     return fileName
 
 #Downloads Google Doc as pdf
@@ -255,9 +289,6 @@ def downloadDocument(id):
     #Issue where pdfs are being downloaded as HTML documents
         #This ensures it is a pdf file type
     if(fileName.find('.html') != -1):
-        testURL = 'https://www.geeksforgeeks.org/python-convert-html-pdf/'
-        print(fileName)
-        
         #Get filename without extension and replace with'.pdf'
         pdfName = os.path.splitext(fileName)[0] + '.pdf'
         print(pdfName)
@@ -293,7 +324,7 @@ def googleNode(url):
     elif(url.find('spreadsheets') != -1):
         print("Found Spreadsheet")
         #Work In Progress
-        fileName = 'BestPracticesforBlendedLearning.pdf'
+        return None
     
     #Use download and filename to create node
     googleNode = DocumentNode(
@@ -333,7 +364,7 @@ def getNodeFromLocation(loc):
     response = requests.get(loc, auth=auth)
     data = response.json()
     
-    #Found attachements attribute in JSON (Could be link, video, google file...)
+    #Found attachments attribute in JSON (Could be link, video, google file...)
     if 'attachments' in data:
         
         #Check for links
