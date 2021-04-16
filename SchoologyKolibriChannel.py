@@ -62,7 +62,7 @@ from le_utils.constants.languages import getlang
 
 from ricecooker.chefs import SushiChef
 from ricecooker.classes.nodes import DocumentNode, AudioNode, VideoNode, HTML5AppNode, TopicNode
-from ricecooker.classes.files import DocumentFile, AudioFile, VideoFile, YouTubeVideoFile, YouTubeSubtitleFile, HTMLZipFile
+from ricecooker.classes.files import DocumentFile, AudioFile, WebVideoFile, VideoFile, YouTubeVideoFile, YouTubeSubtitleFile, HTMLZipFile
 from ricecooker.classes.licenses import get_license
 
 import copy
@@ -122,7 +122,7 @@ for section in data['section']:
         
 i = 0
 for key, value in courses.items():
-    i =+ 1
+    i += 1
     print(str(i) + "\tCourse ID: " + key + "\tCourse Title: " + value)
 print()
 
@@ -137,7 +137,7 @@ print()
 
 i = 0
 for key, value in sections.items():
-    i =+ 1
+    i += 1
     print(str(i) + "\tSection ID: " + key + "\tSection Title: " + value)
 print()
 
@@ -280,9 +280,40 @@ def youtubeNode(url):
     
     #Return Video Node
     return video_node
+
+def vimeoNode(url):
+    r = requests.get(url).text # grabs request of the URL
+    
+    #Get video title
+    bs = bs4.BeautifulSoup(r, "html.parser")
+    videoTitle = bs.find_all('title', limit=1)
+                 
+    #videoTitle includes html tags, stripping them
+    newTitle = str(re.sub('<.*?>', '', str(videoTitle)))
+    
+    #May have to delete if there are brackets in title
+    newTitle = newTitle.replace("]", '')
+    newTitle = newTitle.replace("[", '')
+    
+    
+    #Create Video Node
+    video_node = VideoNode(
+        source_id= url,  # set to url
+        title = str(newTitle),
+        license=get_license(licenses.CC_BY, copyright_holder='Copyright holder name'),
+        language=getlang('en').id,
+        derive_thumbnail=True,  # video-specicig flag
+        thumbnail=None,
+        files=[
+                WebVideoFile(web_url = url, language='en'),
+            ]
+    )
+    
+    #Return Video Node
+    return video_node
 #YOUTUBE VIDEO CODE END HERE
 
-#PDF/DOCUMENT NODE CODE STARTS HERE
+#GOOGLE PDF NODE CODE STARTS HERE
 
 def checkIfDownloadNeededFromPage(body):
     download = re.findall("\".*docs.google.com.*\"", body)
@@ -365,6 +396,36 @@ def downloadDocument(id):
         
     return fileName
 
+def downloadSpreadsheet(id):
+    #https://docs.google.com/spreadsheets/d/{}/export?format=pdf
+    """Accepts a string ID. Reads byte data from request content and writes into PDF"""
+    url = "https://docs.google.com/spreadsheets/d/{}/export?format=pdf".format(id)
+    req = requests.get(url)
+    fileName = re.findall("filename=.*;", req.headers['content-disposition'])[0].split("\"")[1]
+    with open(fileName, 'wb') as f:
+        f.write(req.content)
+        
+    #Issue where pdfs are being downloaded as HTML documents
+        #This ensures it is a pdf file type
+    if(fileName.find('.html') != -1):
+        #Get filename without extension and replace with'.pdf'
+        pdfName = os.path.splitext(fileName)[0] + '.pdf'
+        print(pdfName)
+        
+        print("\nHTML found instead of PDF.\nConverting to PDF using pdfkit...")
+        
+        #INFO: Could not find files for the given pattern(s).
+            #wkhtmltopdf install needed
+            #I would prefer to find a different way, or figure out why it is downloading as html, but this will do for now
+        pdfkit.from_file(fileName, pdfName)
+        
+        print("PDF Conversion Complete")
+        
+        fileName = pdfName
+        
+    return fileName
+
+
 def googleNode(url):
     #Get doc id
     id = getIdFromUrl(url)
@@ -380,8 +441,7 @@ def googleNode(url):
         fileName = downloadPowerpoint(id)
     elif(url.find('spreadsheets') != -1):
         print("Found Spreadsheet")
-        #Work In Progress
-        return None
+        fileName = downloadSpreadsheet(id)
     
     #Use download and filename to create node
     googleNode = DocumentNode(
@@ -398,7 +458,41 @@ def googleNode(url):
         ],
     )
     return googleNode
-#PDF/DOCUMENT NODE CODE ENDS HERE
+#GOOGLE PDF NODE CODE ENDS HERE
+
+#DOCUMENT PDF NODE STARTS HERE
+pdfCopy = 1
+def pdfNode(infoDict):
+    #Get response from converted-to-pdf path
+    response = requests.get(infoDict['pdfPath'], auth=auth)
+    
+    global pdfCopy
+    if os.path.exists(infoDict['pdfTitle']):
+        infoDict['pdfTitle'] = infoDict['pdfTitle'].replace(".pdf", str(pdfCopy) + ".pdf")
+        pdfCopy += 1
+        
+    #Write pdf to local file
+    with open(infoDict['pdfTitle'], 'wb') as f:
+        f.write(response.content)
+        
+    #Create Document Node
+    pdfNode = DocumentNode(
+        source_id= str(infoDict['id']),
+        title = infoDict['pdfTitle'],
+        language="en",
+        description="",
+        license=get_license(licenses.CC_BY, copyright_holder='Copyright holder name'),
+        files=[
+            DocumentFile(
+                path=infoDict['pdfTitle'],
+                language="en",
+            )
+        ],
+    )
+    return pdfNode
+    
+#DOCUMENT PDF NODE ENDS HERE
+
 
 #NON-NODE FUNCTIONS BELOW
 #GET GOOGLE DOC ID
@@ -454,8 +548,24 @@ def getNodeFromLocation(loc):
             print("Video - Title:" + innerData['title'])
             urlString = str(innerData['url'])
             
+            if 'youtube' in urlString:
+                return youtubeNode(urlString)
+            elif 'vimeo' in urlString:
+                return vimeoNode(urlString)
+            else:
+                print("Error: Video source not supported")
+            
             #Url -> YouTubeNode
             return youtubeNode(urlString)
+        
+        #File found in attachments
+        elif 'files' in data['attachments']:
+            fileInfo = {}
+            fileInfo['id'] = data['id']
+            fileInfo['pdfPath'] = data['attachments']['files']['file'][0]['converted_download_path']
+            fileInfo['pdfTitle'] = data['attachments']['files']['file'][0]['converted_filename']
+            return pdfNode(fileInfo)
+            
     else:
         #Sometimes, URL for Google Docs/Slides is stored in a different call
             #This checks that call to make sure these Docs/Slides aren't skipped
@@ -536,6 +646,15 @@ class SimpleChef(SushiChef):
         
         #Create root node in folderDict
         folderDict[0] = []
+        
+        #Populate root node because the API call is handled differently than other folders
+        url = "https://api.schoology.com/v1/courses/" + sectionID + "/folder/0"
+        response = requests.get(url, auth=auth)
+        rootData = response.json()
+        for child in rootData['folder-item']:
+            #Folders and their parents are handled next along with other child files
+            if child['type'] != 'folder':
+                folderDict[0].append(child['location'])
 
         #Put IDs of folders as keys in folderDict, empty arrays for value 
         for folder in data['folders']:
