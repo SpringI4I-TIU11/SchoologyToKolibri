@@ -1,6 +1,6 @@
 # SchoologyToKolibri
 
-Schoology is a course management website that hosts coursework for different schools, teachers, and classes. Kolibri operates in a similar way, but it instead acts an resource that students can download and access offline. The Schooloy to Kolibri project's goal was to create a tool that pulls content from a course section in Schoology and import into it a channel(acts as a course in Kolibri) in Kolibri.
+Schoology is a course management website that hosts coursework for different schools, teachers, and classes. Kolibri operates in a similar way, but it instead acts an resource that students can download and access offline. The Schoology to Kolibri project's goal was to create a tool that pulls content from a course section in Schoology and import into it a channel(acts as a course in Kolibri) in Kolibri.
 
 The python file, SchoologyKolibriChannel.py, is the main tool of our project. Before this can be run, there are several steps to setting up needed packages and getting required information. 
 
