@@ -25,7 +25,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
     A Kolibri Studio account is needed to get the API token. 
     The token can be found at https://studio.learningequality.org/ in the settings. 
     This token is used in the command line to run the script, and it can be done in two different ways.
-    Run this script on the command line using:
+   When the script is eventually run, it will be done using one of these two commands:
     
 ```
  python SchoologyKolibriChannel.py  --token=<your-token>
