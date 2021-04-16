@@ -33,7 +33,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
         python SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
        ```
        
-    The Ricecooker token will ensure that the created channel will be saved to your account.
+   The Ricecooker token will ensure that the created channel will be saved to your account.
   
 ## Installing Packages
   * Python 3.7 and pip are needed to install packages.
