@@ -74,6 +74,9 @@ import bs4
 
 from urllib.parse import urljoin
     
+#For deleting files are they are imported into Kolibri
+filesCreated = []    
+
 #SCHOOLOGY API CONSUMER KEY AND SECRET
 
 #Set as global varibales to be accessed in functions
@@ -224,8 +227,12 @@ def linkAssignment(linkData):
     #Outputs files being downloaded
     print("        ... downloaded to %s" % filename)
     
+    filesCreated.append(filename)
+    
     #Make zip file from folder contents
     shutil.make_archive(filename, 'zip', filename)
+    
+    filesCreated.append(filename + '.zip')
     
     #Creation of file and node
     link_file = HTMLZipFile(path = (filename + '.zip'))
@@ -346,6 +353,8 @@ def downloadPowerpoint(id):
     #Issue where pdfs are being downloaded as HTML documents
         #This ensures it is a pdf file type
     if(fileName.find('.html') != -1):
+        filesCreated.append(fileName)
+        
         #Get filename without extension and replace with'.pdf'
         pdfName = os.path.splitext(fileName)[0] + '.pdf'
         print(pdfName)
@@ -363,6 +372,8 @@ def downloadPowerpoint(id):
         
         fileName = pdfName
         
+    filesCreated.append(fileName)
+    
     return fileName
 
 #Downloads Google Doc as pdf
@@ -377,6 +388,8 @@ def downloadDocument(id):
     #Issue where pdfs are being downloaded as HTML documents
         #This ensures it is a pdf file type
     if(fileName.find('.html') != -1):
+        filesCreated.append(fileName)
+        
         #Get filename without extension and replace with'.pdf'
         pdfName = os.path.splitext(fileName)[0] + '.pdf'
         print(pdfName)
@@ -394,6 +407,7 @@ def downloadDocument(id):
         
         fileName = pdfName
         
+    filesCreated.append(fileName)
     return fileName
 
 def downloadSpreadsheet(id):
@@ -408,6 +422,8 @@ def downloadSpreadsheet(id):
     #Issue where pdfs are being downloaded as HTML documents
         #This ensures it is a pdf file type
     if(fileName.find('.html') != -1):
+        filesCreated.append(fileName)
+        
         #Get filename without extension and replace with'.pdf'
         pdfName = os.path.splitext(fileName)[0] + '.pdf'
         print(pdfName)
@@ -423,6 +439,7 @@ def downloadSpreadsheet(id):
         
         fileName = pdfName
         
+    filesCreated.append(fileName)
     return fileName
 
 
@@ -474,6 +491,8 @@ def pdfNode(infoDict):
     #Write pdf to local file
     with open(infoDict['pdfTitle'], 'wb') as f:
         f.write(response.content)
+        
+    filesCreated.append(infoDict['pdfTitle'])
         
     #Create Document Node
     pdfNode = DocumentNode(
@@ -613,11 +632,15 @@ class SimpleChef(SushiChef):
     if file_extension == '.svg':
         thumbnail = "output.png"
         outputSVG = 'output.svg'
+        
+        filesCreated.append(thumbnail)
+        filesCreated.append(outputSVG)
+        
         urllib.request.urlretrieve(imageURL, outputSVG)
         cairosvg.svg2png(url=outputSVG, write_to=thumbnail)
     else:
         thumbnail = "output" + file_extension
-        outputFile = "output" + file_extension
+        filesCreated.append(thumbnail)
         urllib.request.urlretrieve(imageURL, thumbnail)
 
     channel_info = {
@@ -746,6 +769,7 @@ class SimpleChef(SushiChef):
                             parentFound = False
                             break
             
+        
         return channel
 
 
@@ -760,3 +784,12 @@ if __name__ == "__main__":
     """
     simple_chef = SimpleChef()
     simple_chef.main()
+    
+    
+    #Delete files stores locally
+    #They have been uploaded, not needed anymore
+    for file in filesCreated:
+        if os.path.isdir(file):
+            shutil.rmtree(file)
+        else:
+            os.remove(file)
