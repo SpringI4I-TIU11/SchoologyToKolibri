@@ -26,11 +26,13 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
     The token can be found at https://studio.learningequality.org/ in the settings. 
     This token is used in the command line to run the script, and it can be done in two different ways.
     Run this script on the command line using:
+    
        ```
         python SchoologyKolibriChannel.py  --token=<your-token>
         or you can store the token in an empty .txt file and use that to run the command.
         python SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
        ```
+       
     The Ricecooker token will ensure that the created channel will be saved to your account.
   
 ## Installing Packages
