@@ -36,9 +36,9 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
 ## Installing Packages
   * Python 3.7 and pip are needed to install packages.
   * All of the required packages can be installed by running the installs.py file in command line. This is run by doing this comamnd:
-   '''
+   ```
    python installs.py
-   '''
+   ```
  * The installs.py file run multiple pip commands to install all of the required packages for the main tool. 
   
 ## Running the Tool
