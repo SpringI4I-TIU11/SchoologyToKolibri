@@ -5,7 +5,8 @@ Schoology is a course management website that hosts coursework for different sch
 The python file, SchoologyKolibriChannel.py, is the main tool of our project. Before this can be run, there are several steps to setting up needed packages and getting required information. 
 
 ## Required Software
-  * Python 3.7 is needed in order to run the package installation. 
+  * Python 3.7.0 is needed in order to run the package installation. 
+   * The download for Python 3.7.0 cna be found here: https://www.python.org/downloads/release/python-370/ .
   * Pip is also needed for installing packages.
   * wkhtmltopdf is needed for some file conversions in the tool.
     * The instructions for installation can be found at https://wkhtmltopdf.org/.
