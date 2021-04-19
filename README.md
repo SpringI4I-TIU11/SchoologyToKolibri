@@ -13,6 +13,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
    rather than
    python SchoologyKolibriChannel.py  --token=<your-token>
    ```
+  * The rest of this document will use "py -3.7" as the command since it will always specificy Python 3.7. However, if you only have that version of Python downloaded, you can just use "python"
   * Pip is also needed for installing packages.
   * wkhtmltopdf is needed for some file conversions in the tool.
     * The instructions for installation can be found at https://wkhtmltopdf.org/.
@@ -34,9 +35,9 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
    When the script is eventually run, it will be done using one of these two commands:
     
 ```
- python SchoologyKolibriChannel.py  --token=<your-token>
+ py -3.7 SchoologyKolibriChannel.py  --token=<your-token>
  or you can store the token in an empty .txt file and use that to run the command.
- python SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
+ py -3.7 SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
 ```
        
    The Ricecooker token will ensure that the created channel will be saved to your account.
@@ -45,7 +46,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
   * Python 3.7 and pip are needed to install packages.
   * All of the required packages can be installed by running the installs.py file in command line. Navigate in the directory holding both the installs.py and SchoologyKolibriChannel.py by using the cd command in command line. Run the installs.py file by using this command:
    ```
-   python installs.py
+   py -3.7 installs.py
    ```
  * The installs.py file run multiple pip commands to install all of the required packages for the main tool. 
   
@@ -54,9 +55,9 @@ After the installation of the packages, everything should be set up to run the t
 In the command line, you should still be in the program's directory after running the installs.py file. If not, navigate into the directory where SchoologyKolibriChannel.py is stored using the cd command.
 The tool can then be run on the command line using one of two commands:
   
-    python SchoologyKolibriChannel.py  --token=<your-token>
+    py -3.7 SchoologyKolibriChannel.py  --token=<your-token>
     or if you stored the token in a .txt file, you will run the command below
-    python SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
+    py -3.7 SchoologyKolibriChannel.py --token=<file-path-to-.txt-file>
   
 During the runtime of the tool, you will be asked to enter the Schoology Consumer Key and Consumer Secret. 
 After this, it will ask what course and section you would like to import into Kolibri.
