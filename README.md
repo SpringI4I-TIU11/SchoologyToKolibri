@@ -7,7 +7,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
 ## Required Software
   * Python 3.7.0 is needed in order to run the package installation. 
    * The download for Python 3.7.0 can be found here: https://www.python.org/downloads/release/python-370/ .
-   * If you have a different or higher version of Python already downloaded, Python 3.7 will still be needed. You can specify Python 3.7 when running the script by using
+   * If you have a different or higher version of Python already downloaded, Python 3.7 will still be needed. "py -3.7" rather than "python" can be used to specify Python 3.7 when running scripts. An example is shown below: 
    ```
    py -3.7 SchoologyKolibriChannel.py  --token=<your-token>
    rather than
