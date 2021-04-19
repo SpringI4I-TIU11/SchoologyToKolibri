@@ -13,7 +13,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
    rather than
    python SchoologyKolibriChannel.py  --token=<your-token>
    ```
-    * The rest of this document will use "py -3.7" as the command since it will always specify Python 3.7. However, if you only have that version of Python downloaded, you can just use "python"
+ The rest of this document will use "py -3.7" as the command since it will always specify Python 3.7. However, if you only have that version of Python downloaded, you can just use "python"
   * Pip is also needed for installing packages.
   * wkhtmltopdf is needed for some file conversions in the tool.
     * The instructions for installation can be found at https://wkhtmltopdf.org/.
