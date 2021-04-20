@@ -26,7 +26,7 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
  * Next, ffmpeg and poppler both need to be set up as a Path variable.
  * To do this on Windows, on the bottom left search bar, enter "enviroment variables". An option to "Edit enviroment variables for your account" should appear. Click on this. 
  * You will get this window shown below: 
- ![Path Variable](Instruction Photos\Path Photo.png)
+ ![Path Variable](\Instruction Photos\Path Photo.png)
  * Click on the user variable in the top section that says "Path" to highlight it.
   * After it is highlighted, select "Edit..."
   * Once this window is open, go to folder that contains the files from the repository. Select the ffmpeg folder and open it, then open the bin folder. 
