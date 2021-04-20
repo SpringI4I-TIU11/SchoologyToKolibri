@@ -16,7 +16,13 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
  The rest of this document will use "py -3.7" as the command since it will always specify Python 3.7. However, if you only have that version of Python downloaded, you can just use "python"
   * Pip is also needed for installing packages.
   * wkhtmltopdf is needed for some file conversions in the tool.
-    * The instructions for installation can be found at https://wkhtmltopdf.org/. Here, you can select "Precompiled Binary" and then select your operating system for the exectuable installer. 
+    * The instructions for installation can be found at https://wkhtmltopdf.org/. Here, you can select "Precompiled Binary" and then select your operating system for the exectuable installer.
+  * ffmpeg will need to be set up. For ease of use, I have included the files needed in the project. Just in case, the ffmpeg builds can be found at this link: https://github.com/btbn/ffmpeg-builds/releases. 
+  * poopler will also need to be set up. For ease of use, I have included the files needed in the project. Just in case, the poppler builds can be found at this link: http://blog.alivate.com.au/poppler-windows/ . 
+    * Instructions for how to set up ffmpeg and poppler will be included in the next section.  
+
+## Setting Up Ffmpeg and Poppler
+
 
 ## Required Keys and Tokens:
   Using the tool requires the use of two keys for Schoology's API and a token for Kolibri's API.
