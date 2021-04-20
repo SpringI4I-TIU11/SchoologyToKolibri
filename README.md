@@ -30,25 +30,25 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
 ![Path Variable](https://user-images.githubusercontent.com/79809432/115325854-59c2cf80-a15a-11eb-81ec-f27f185f95e7.png)
 
  * Click on the user variable in the top section that says "Path" to highlight it.
-  * After it is highlighted, select "Edit..." and a wdinow should open:
+   * After it is highlighted, select "Edit..." and a window should open:
  
  ![edit environment variable image](https://user-images.githubusercontent.com/79809432/115325935-7f4fd900-a15a-11eb-8dec-35c614b075e4.png)
  
   * Once this window is open, go to folder that contains the files from the repository. Select the ffmpeg folder and open it, then open the bin folder. 
-   * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
+    * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
   
   ![ffmpeg bin path](https://user-images.githubusercontent.com/79809432/115326024-97bff380-a15a-11eb-8ec9-7aa6fc85c0c4.png)
   
   * Finally, go back to the "Edit environment variable" screen and select new. 
-   * Copy the path into the field. 
+    * Copy the path into the field. 
  
  ![New path Variable](https://user-images.githubusercontent.com/79809432/115326102-baeaa300-a15a-11eb-95a2-479cd8cd5656.png)
  
   * Now the same must be done for the poppler bin folder. 
   * Return to the folder containing the files of the repository. Select the poppler folder and open it, then open the bin folder. 
-   * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
+    * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
   * Finally, go back to the "Edit environment variable" screen and select new. 
-   * Copy the path into the field. 
+    * Copy the path into the field. 
  
  ![New path Variable](https://user-images.githubusercontent.com/79809432/115326124-c4740b00-a15a-11eb-962b-35d2c0f49191.png)
  
