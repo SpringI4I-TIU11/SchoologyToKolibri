@@ -34,7 +34,8 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
  
  ![edit environment variable image](https://user-images.githubusercontent.com/79809432/115325935-7f4fd900-a15a-11eb-8dec-35c614b075e4.png)
  
-  * Once this window is open, go to folder that contains the files from the repository. Select the ffmpeg folder and open it, then open the bin folder. 
+  * Once this window is open, go to folder that contains the files from the repository. 
+  * Select the ffmpeg folder and open it, then open the bin folder. 
     * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
   
   ![ffmpeg bin path](https://user-images.githubusercontent.com/79809432/115326024-97bff380-a15a-11eb-8ec9-7aa6fc85c0c4.png)
@@ -45,7 +46,8 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
  ![New path Variable](https://user-images.githubusercontent.com/79809432/115326102-baeaa300-a15a-11eb-95a2-479cd8cd5656.png)
  
   * Now the same must be done for the poppler bin folder. 
-  * Return to the folder containing the files of the repository. Select the poppler folder and open it, then open the bin folder. 
+  * Return to the folder containing the files of the repository. 
+  * Select the poppler folder and open it, then open the bin folder. 
     * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
 
 ![poppler bin path](https://user-images.githubusercontent.com/79809432/115326565-790e2c80-a15b-11eb-98d9-0e99e7b9f154.png)
