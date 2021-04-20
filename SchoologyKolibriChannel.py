@@ -50,7 +50,8 @@ from ricecooker.utils.html import download_file
 import time
 
 #Convert svg to png
-import cairosvg
+#There were issues with this converter. Commenting for now. 
+#import cairosvg
 
 #Converting URL to PDF
     #Involves other installs
@@ -558,7 +559,7 @@ def getNodeFromLocation(loc):
                 print("Link Node Reached")
                 #Link Assignment creation is very slow, comment out to test other things
                     #Could add pdf creation in case WebApp is bad
-                return linkAssignment(data)
+                #return linkAssignment(data)
         
         #Video found in attachments
         elif 'videos' in data['attachments']:
@@ -630,6 +631,11 @@ class SimpleChef(SushiChef):
     
     #If image is an svg, convert to png
     if file_extension == '.svg':
+        thumbnail = 'DefaultThumbnail.jpg'
+        
+        """
+        #There were issues with the svg converter, cairosvg.
+        #Instead, if the photo is an svg, it will refer to a default image.
         thumbnail = "output.png"
         outputSVG = 'output.svg'
         
@@ -638,6 +644,8 @@ class SimpleChef(SushiChef):
         
         urllib.request.urlretrieve(imageURL, outputSVG)
         cairosvg.svg2png(url=outputSVG, write_to=thumbnail)
+        """
+        
     else:
         thumbnail = "output" + file_extension
         filesCreated.append(thumbnail)
