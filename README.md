@@ -22,7 +22,24 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
     * Instructions for how to set up ffmpeg and poppler will be included in the next section.  
 
 ## Setting Up Ffmpeg and Poppler
-
+ * Before anything else, the zip file for this repository will need to be downloaded and extracted to a location where you can find it.  
+ * Next, ffmpeg and poppler both need to be set up as a Path variable.
+ * To do this on Windows, on the bottom left search bar, enter "enviroment variables". An option to "Edit enviroment variables for your account" should appear. Click on this. 
+ * You will get this window shown below: 
+ ![Path Variable](C:\Users\lbisc\Desktop\Github Photos\Path Photo.png)
+ * Click on the user variable in the top section that says "Path" to highlight it.
+  * After it is highlighted, select "Edit..."
+  * Once this window is open, go to folder that contains the files from the repository. Select the ffmpeg folder and open it, then open the bin folder. 
+   * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
+  
+  * Finally, go back to the "Edit environment variable" screen and select new. 
+   * Copy the path into the field. 
+ 
+  * Now the same must be done for the poppler bin folder. 
+  * Return to the folder containing the files of the repository. Select the poppler folder and open it, then open the bin folder. 
+   * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
+  * Finally, go back to the "Edit environment variable" screen and select new. 
+   * Copy the path into the field. 
 
 ## Required Keys and Tokens:
   Using the tool requires the use of two keys for Schoology's API and a token for Kolibri's API.
