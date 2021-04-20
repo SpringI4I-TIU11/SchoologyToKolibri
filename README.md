@@ -9,9 +9,9 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
     * The download for Python 3.7.0 can be found here: https://www.python.org/downloads/release/python-370/ .
     * If you have a different or higher version of Python already downloaded, Python 3.7 will still be needed. "py -3.7" rather than "python" can be used to specify Python 3.7 when running scripts. An example is shown below: 
    ```
-   py -3.7 SchoologyKolibriChannel.py  --token=<your-token>
+   py -3.7 installs.py
    rather than
-   python SchoologyKolibriChannel.py  --token=<your-token>
+   python installs.py
    ```
  The rest of this document will use "py -3.7" as the command since it will always specify Python 3.7. However, if you only have that version of Python downloaded, you can just use "python"
   * Pip is also needed for installing packages.
