@@ -559,7 +559,7 @@ def getNodeFromLocation(loc):
                 print("Link Node Reached")
                 #Link Assignment creation is very slow, comment out to test other things
                     #Could add pdf creation in case WebApp is bad
-                #return linkAssignment(data)
+                return linkAssignment(data)
         
         #Video found in attachments
         elif 'videos' in data['attachments']:
