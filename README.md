@@ -47,6 +47,10 @@ The python file, SchoologyKolibriChannel.py, is the main tool of our project. Be
   * Now the same must be done for the poppler bin folder. 
   * Return to the folder containing the files of the repository. Select the poppler folder and open it, then open the bin folder. 
     * Once the bin folder is open, grab the path to it by highlighting the top bar as shown in the picture below:
+
+![poppler bin path](https://user-images.githubusercontent.com/79809432/115326565-790e2c80-a15b-11eb-98d9-0e99e7b9f154.png)
+
+
   * Finally, go back to the "Edit environment variable" screen and select new. 
     * Copy the path into the field. 
  
