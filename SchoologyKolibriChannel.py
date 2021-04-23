@@ -338,7 +338,6 @@ def checkIfDownloadNeededFromPage(body):
         id = re.findall("/d/.*/", link)[0].split('/d/')[1]
         
         return [id, type]
-        #do something with id. Maybe call download from google?
     else:
         return None
     
